@@ -1,7 +1,5 @@
 include:
-  - board: nice_nano_v2
+  - board: nice_nano@v2
     shield: urchin_left
-    snippet: zmk-usb-logging
-  - board: nice_nano_v2
+  - board: nice_nano@v2
     shield: urchin_right
-    snippet: zmk-usb-logging
