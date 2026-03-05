@@ -1,7 +1,9 @@
 include:
   - board: nice_nano@2.0.0
     shield: urchin_left
-    cmake-args: -DSHIELD_AS_MODULE=ON
+    snippet: zmk-ad-hoc-shield
+    board-root: config
   - board: nice_nano@2.0.0
     shield: urchin_right
-    cmake-args: -DSHIELD_AS_MODULE=ON
+    snippet: zmk-ad-hoc-shield
+    board-root: config
