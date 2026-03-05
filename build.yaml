@@ -1,5 +1,5 @@
 include:
-  - board: nice_nano@v2
+  - board: nice_nano@2.0.0
     shield: urchin_left
-  - board: nice_nano@v2
+  - board: nice_nano@2.0.0
     shield: urchin_right
