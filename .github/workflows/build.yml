@@ -1,33 +1,25 @@
-name: Build Firmware
-
-on: [push, pull_request, workflow_dispatch]
-
-permissions:
-  contents: write
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      # ... (the rest of the steps I shared previously)
-
-      - name: Cache west modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            modules
-            zephyr
-            bootloader
-            zmk
-          key: ${{ runner.os }}-build-v1-${{ hashFiles('**/west.yml', '**/build.yaml') }}
-
-      - name: Install and Build
-        uses: zmkfirmware/zmk-build-action@v3
-        with:
-          repository_path: zmk
-          config_path: config
-          install_modules: 'true'
-          build_matrix_path: build.yaml
+Current runner version: '2.332.0'
+Runner Image Provisioner
+  Hosted Compute Agent
+  Version: 20260213.493
+  Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+  Build Date: 2026-02-13T00:28:41Z
+  Worker ID: {91fa2096-9d4a-4c6b-8f76-40611fb976a6}
+  Azure Region: centralus
+Operating System
+  Ubuntu
+  24.04.3
+  LTS
+Runner Image
+  Image: ubuntu-24.04
+  Version: 20260302.42.1
+  Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260302.42/images/ubuntu/Ubuntu2404-Readme.md
+  Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260302.42
+GITHUB_TOKEN Permissions
+  Contents: write
+  Metadata: read
+Secret source: Actions
+Prepare workflow directory
+Prepare all required actions
+Getting action download info
+Error: Unable to resolve action zmkfirmware/zmk-build-action, repository not found
