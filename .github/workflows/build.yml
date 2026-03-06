@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Cache west modules
         uses: actions/cache@v4
         with:
@@ -17,11 +17,12 @@ jobs:
             zephyr
             bootloader
             zmk
-          # Note: ensure zephyr_version is defined or use a static string if it's not set elsewhere
-          key: ${{ runner.os }}-build-${{ env.zephyr_version }}-${{ hashFiles('**/west.yml', '**/build.yaml') }}
-      
-      - name: West Init
-        run: west init -l config
-      
-      - name: West Update
-        run: west update
+          key: ${{ runner.os }}-build-v1-${{ hashFiles('**/west.yml', '**/build.yaml') }}
+
+      - name: Install and Build
+        uses: zmkfirmware/zmk-build-action@v3
+        with:
+          repository_path: zmk
+          config_path: config
+          install_modules: 'true'
+          build_matrix_path: build.yaml
