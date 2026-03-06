@@ -12,18 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache west modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            modules
-            zephyr
-            bootloader
-            zmk
-          key: ${{ runner.os }}-build-v1-${{ hashFiles('**/west.yml', '**/build.yaml') }}
-
       - name: Build ZMK
-        uses: zmkfirmware/zmk-build-action@v3.5.0
+        uses: zmkfirmware/zmk-build-action@v3
         with:
           repository_path: zmk
           config_path: config
@@ -34,6 +24,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: urchin_firmware
-          path: |
-            build/artifacts/*.uf2
-            build/artifacts/*.bin
+          path: build/artifacts/*.uf2
