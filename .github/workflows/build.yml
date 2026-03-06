@@ -8,24 +8,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      # ... (The rest of your existing steps go here)
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
       
-        - name: Cache west modules
-          uses: actions/cache@v4
-          with:
-            path: |
-              modules
-              zephyr
-              bootloader
-              zmk
-            key: ${{ runner.os }}-build-${{ env.zephyr_version }}-${{ hashFiles('**/west.yml', '**/build.yaml') }}
+      - name: Cache west modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            modules
+            zephyr
+            bootloader
+            zmk
+          # Note: ensure zephyr_version is defined or use a static string if it's not set elsewhere
+          key: ${{ runner.os }}-build-${{ env.zephyr_version }}-${{ hashFiles('**/west.yml', '**/build.yaml') }}
       
-        - name: West Init
-          run: west init -l config
+      - name: West Init
+        run: west init -l config
       
-        - name: West Update
-          run: west update
+      - name: West Update
+        run: west update
