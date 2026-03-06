@@ -1,19 +1,31 @@
-steps:
-  - name: Checkout
-    uses: actions/checkout@v4
+name: Build Firmware
 
-  - name: Cache west modules
-    uses: actions/cache@v4
-    with:
-      path: |
-        modules
-        zephyr
-        bootloader
-        zmk
-      key: ${{ runner.os }}-build-${{ env.zephyr_version }}-${{ hashFiles('**/west.yml', '**/build.yaml') }}
+on: [push, pull_request, workflow_dispatch]
 
-  - name: West Init
-    run: west init -l config
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  - name: West Update
-    run: west update
+      # ... (The rest of your existing steps go here)
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+      
+        - name: Cache west modules
+          uses: actions/cache@v4
+          with:
+            path: |
+              modules
+              zephyr
+              bootloader
+              zmk
+            key: ${{ runner.os }}-build-${{ env.zephyr_version }}-${{ hashFiles('**/west.yml', '**/build.yaml') }}
+      
+        - name: West Init
+          run: west init -l config
+      
+        - name: West Update
+          run: west update
