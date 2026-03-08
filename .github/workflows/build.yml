@@ -1,9 +1,29 @@
-- name: Build ZMK
-   uses: zmkfirmware/zmk-build-action@v3
-      with:
-      repository_path: zmk
+name: Build Firmware
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build ZMK
+        uses: zmkfirmware/zmk-build-action@v3
+        with:
+          repository_path: zmk
           config_path: config
           install_modules: 'true'
           build_matrix_path: config/build.yaml
-          # Use this variable to force ZMK to look at the downloaded duckyb files
+          # This points the compiler to the downloaded duckyb shield files
           extra_cmake_args: -DZEPHYR_EXTRA_MODULES='${{ github.workspace }}/modules/zmk-urchin'
+
+      - name: Archive firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: urchin_firmware
+          path: build/artifacts/*.uf2
