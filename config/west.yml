@@ -9,8 +9,5 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: zmk-urchin
-      remote: duckyb
-      revision: main
   self:
     path: config
