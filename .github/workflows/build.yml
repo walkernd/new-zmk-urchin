@@ -4,6 +4,6 @@
           repository_path: zmk
           config_path: config
           install_modules: 'true'
-          build_matrix_path: build.yaml
-          # This line tells the compiler where the extra shields are:
-          extra_cmake_args: -DZEPHYR_ZMK_URCHIN_MODULE_DIR='/__w/new-zmk-urchin/new-zmk-urchin/modules/zmk-urchin'
+          build_matrix_path: config/build.yaml
+          # Use this variable to force ZMK to look at the downloaded duckyb files
+          extra_cmake_args: -DZEPHYR_EXTRA_MODULES='${{ github.workspace }}/modules/zmk-urchin'
